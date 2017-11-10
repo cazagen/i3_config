@@ -218,3 +218,6 @@ bindsym $mod+e exec nautilus
 
 # Run IRCCloud on startup
 exec IRCCloud
+
+# Shift to last used workspace
+bindsym XF86Tools workspace back_and_forth
