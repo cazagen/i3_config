@@ -171,7 +171,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 # Screen lock stuff
-exec --no-startup-id i3-msg 'exec xautolock -time 5 -locker lock'
+exec --no-startup-id i3-msg 'exec xautolock -time 5 -locker lock -notify 5 -notifier "notify-send --urgency=critical 'LOCKING screen in 5 seconds'" -corners -000'
 bindsym $mod+l exec lock
 
 for_window [class="^.*"] border pixel 1
@@ -201,3 +201,5 @@ bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures'
 
 # Open nautilus
 bindsym $mod+e exec nautilus
+
+exec IRCCloud
