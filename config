@@ -11,6 +11,9 @@
 
 set $mod Mod4
 
+# Set wallpaper
+exec --no-startup-id feh --bg-scale /home/cazagen/Pictures/Wallpapers/wall.png
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
@@ -202,4 +205,5 @@ bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures'
 # Open nautilus
 bindsym $mod+e exec nautilus
 
+# Run IRCCloud on startup
 exec IRCCloud
