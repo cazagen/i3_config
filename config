@@ -221,3 +221,7 @@ exec IRCCloud
 
 # Shift to last used workspace
 bindsym XF86Tools workspace back_and_forth
+
+# PgUp and PgDn to go left and right a workspace
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
