@@ -230,3 +230,6 @@ bindsym XF86Tools workspace back_and_forth
 # PgUp and PgDn to go left and right a workspace
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
+
+# Network manager
+exec --no-startup-id nm-applet
