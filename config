@@ -193,6 +193,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 #exec --no-startup-id i3-msg 'exec xautolock -time 5 -locker lock -notify 5 -notifier "notify-send --urgency=critical 'LOCKING screen in 5 seconds'" -corners -0-0'
 bindsym $mod+l exec lock
 
+# Window borders
+
 for_window [class="^.*"] border pixel 1
 
 # PROPER SCROLLING
@@ -222,6 +224,7 @@ bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures'
 bindsym $mod+e exec nautilus
 
 # Run IRCCloud on startup
+for_window [class="IRCCloud"] fullscreen enable
 exec IRCCloud
 
 # Shift to last used workspace
