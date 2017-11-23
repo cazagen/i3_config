@@ -201,6 +201,10 @@ for_window [class="^.*"] border pixel 1
 
 exec --no-startup-id i3-msg 'exec xinput set-prop 11 286 1'
 
+# Enable tap to click
+
+exec --no-startup-id i3-msg 'exec xinput set-prop 11 276 1'
+
 # Open opera
 bindsym XF86Search exec opera
 
