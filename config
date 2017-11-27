@@ -221,8 +221,8 @@ bindsym Shift+XF86LaunchA exec --no-startup-id i3-msg 'exec mosquitto_pub -h mqt
 bindsym Print --release exec scrot -e 'mv $f /home/cazagen/Pictures' 
 bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures' 
 
-# test
-#bindsym $mod+p exec gnome-terminal -e ./yesnobox.sh
+# Hacklab mqtt speak script
+bindsym Shift+XF86Explorer exec gnome-terminal -e /home/cazagen/.config/i3/scripts/speak.sh
 
 # Open nautilus
 bindsym $mod+e exec nautilus
