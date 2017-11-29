@@ -170,7 +170,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status 
+        status_command py3status -c ~/.config/i3status/config --include /home/cazagen/.config/i3/scripts
+
 }
 
 # Media controls
@@ -222,7 +223,7 @@ bindsym Print --release exec scrot -e 'mv $f /home/cazagen/Pictures'
 bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures' 
 
 # Hacklab mqtt speak script
-bindsym Shift+XF86Explorer exec gnome-terminal -e /home/cazagen/.config/i3/scripts/speak.sh
+bindsym Shift+XF86Explorer exec gtk-launch zen
 
 # Open nautilus
 bindsym $mod+e exec nautilus
