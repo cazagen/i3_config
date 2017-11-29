@@ -200,11 +200,11 @@ for_window [class="^.*"] border pixel 1
 
 # PROPER SCROLLING
 
-exec_always --no-startup-id i3-msg 'exec xinput set-prop 11 281 1'
+exec_always --no-startup-id /home/cazagen/.config/i3/scripts/scrolling.py
 
 # Enable tap to click
 
-exec_always --no-startup-id i3-msg 'exec xinput set-prop 11 294 1'
+exec_always --no-startup-id /home/cazagen/.config/i3/scripts/tapping.py
 
 # Open opera
 bindsym XF86Search exec opera
