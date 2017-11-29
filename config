@@ -200,11 +200,11 @@ for_window [class="^.*"] border pixel 1
 
 # PROPER SCROLLING
 
-exec --no-startup-id i3-msg 'exec xinput set-prop 11 286 1'
+exec_always --no-startup-id i3-msg 'exec xinput set-prop 11 281 1'
 
 # Enable tap to click
 
-exec --no-startup-id i3-msg 'exec xinput set-prop 11 276 1'
+exec_always --no-startup-id i3-msg 'exec xinput set-prop 11 294 1'
 
 # Open opera
 bindsym XF86Search exec opera
@@ -230,7 +230,7 @@ bindsym $mod+e exec nautilus
 
 # Run IRCCloud on startup
 for_window [class="IRCCloud"] fullscreen enable
-exec IRCCloud
+exec_always --no-startup-id irccloud-desktop
 
 # Shift to last used workspace
 bindsym XF86Tools workspace back_and_forth
@@ -243,4 +243,4 @@ bindsym $mod+Next workspace next
 exec --no-startup-id nm-applet
 
 # Start compton
-exec-always --no-startup-id compton --config .config/compton.conf -b
+exec_always --no-startup-id compton --config .config/compton.conf -b
