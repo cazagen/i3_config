@@ -11,8 +11,12 @@ parser.read('/home/cazagen/.config/i3/scripts/config.ini')
 
 
 class Py3status:
+
+    enabled = True
+
     def bustracker(self):
         MBT_API_KEY = parser.get('BusTracker', 'api_key')
+
 
         TPL = "{bus_n}:{time}"
         BUSES = {
@@ -65,4 +69,10 @@ class Py3status:
             TPL.format(bus_n=k, time=v['next']) for k, v in BUSES.items() if v['next'] < 120 and v['next'] is not None
         ]
 
-        return {'full_text': " ".join(map(str, output)), 'cached_until': self.py3.time_in(seconds=30)}
+        if self.enabled:
+            return {'full_text': " ".join(map(str, output)), 'cached_until': self.py3.time_in(seconds=30)}
+        else:
+            return {'full_text': "", 'cached_until': self.py3.time_in(seconds=30)}
+
+    def on_click(self, event):
+        self.enabled = not self.enabled
