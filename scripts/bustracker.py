@@ -62,7 +62,7 @@ class Py3status:
         get_times()
 
         output = [
-            TPL.format(bus_n=k, time=v['next']) for k, v in BUSES.items() if v['next'] < 120
+            TPL.format(bus_n=k, time=v['next']) for k, v in BUSES.items() if v['next'] < 120 and v['next'] != None
         ]
 
         return {'full_text': " ".join(map(str, output)), 'cached_until': self.py3.time_in(seconds=30)}

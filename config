@@ -230,7 +230,7 @@ bindsym $mod+e exec nautilus
 
 # Run IRCCloud on startup
 for_window [class="IRCCloud"] fullscreen enable
-exec_always --no-startup-id irccloud-desktop
+exec --no-startup-id irccloud-desktop
 
 # Shift to last used workspace
 bindsym XF86Tools workspace back_and_forth
