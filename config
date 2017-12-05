@@ -20,6 +20,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# start policykit
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
 set $mod Mod4
 
 # Set wallpaper
@@ -191,8 +194,8 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 # Screen lock stuff
-#exec --no-startup-id i3-msg 'exec xautolock -time 5 -locker lock -notify 5 -notifier "notify-send --urgency=critical 'LOCKING screen in 5 seconds'" -corners -0-0'
-bindsym $mod+l exec lock
+#exec --no-startup-id i3-msg 'exec xautolock -time 5 -locker /home/cazagen/.config/i3/scripts/lock.sh -notify 5 -notifier "notify-send --urgency=critical 'LOCKING screen in 5 seconds'" -corners -0-0'
+bindsym $mod+l exec /home/cazagen/.config/i3/scripts/lock.sh
 
 # Window borders
 

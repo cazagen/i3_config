@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 
+#
+#
+#
+# Add priority for show order
+# Add ability to load in buses from config
+#
+#
+
+
 import hashlib
 import time
 import requests
@@ -21,6 +30,10 @@ class Py3status:
         TPL = "{bus_n}:{time}"
         BUSES = {
             "3": {
+                "stop_id": 64323494,
+                "next": None
+            },
+            "33": {
                 "stop_id": 64323494,
                 "next": None
             },
