@@ -18,17 +18,44 @@ from configparser import ConfigParser
 parser = ConfigParser()
 parser.read('/home/cazagen/.config/i3/scripts/config.ini')
 
+class MyIter:
+    def __init__(self, mylist):
+        self.list = mylist
+        self.pos = 0
+    def __iter__(self):
+        while True:
+            yield self.list[self.pos]
+            self.pos += 1
+            if self.pos >= len(self.list):
+                self.pos = 0
+
 
 class Py3status:
 
-    enabled = True
+    def __init__(self):
+        self.enabled = True
+        BUSES_LAB = {
+            "3": {
+                "stop_id": 36234798,
+                "next": None
+            },
+            "33": {
+                "stop_id": 36234798,
+                "next": None
+            },
+            "N3": {
+                "stop_id": 36234798,
+                "next": None
+            },
+            "Place": {
+                "stop_id": None,
+                "next": None,
+                "name" : "Hacklab",
+                "logo" : ""
+            }
+        }
 
-    def bustracker(self):
-        MBT_API_KEY = parser.get('BusTracker', 'api_key')
-
-
-        TPL = "{bus_n}:{time}"
-        BUSES = {
+        BUSES_HOME = {
             "3": {
                 "stop_id": 64323494,
                 "next": None
@@ -40,10 +67,26 @@ class Py3status:
             "N3": {
                 "stop_id": 64323494,
                 "next": None
+            },
+            "Place": {
+                "stop_id": None,
+                "next": None,
+                "name" : "Home",
+                "logo" : ""
             }
         }
+        
+        self.bus_types = [BUSES_HOME, BUSES_LAB]
+        self.bus_type = iter(MyIter(self.bus_types))
+        self.BUSES = next(self.bus_type)
 
 
+
+    def bustracker(self):
+        MBT_API_KEY = parser.get('BusTracker', 'api_key')
+
+        TPL = "{bus_n}:{time}"
+        
         def get_new_api_key(api_key):
             new_api_key = api_key
             new_api_key = new_api_key + time.strftime("%Y%m%d%H")
@@ -56,7 +99,7 @@ class Py3status:
 
         def get_times():
             endpoint = "http://ws.mybustracker.co.uk/?module=json"
-            stop_ids = set([it['stop_id'] for it in BUSES.values()])
+            stop_ids = set([it['stop_id'] for it in self.BUSES.values() if it['stop_id'] is not None])
 
             params = {
                 "key": get_new_api_key(MBT_API_KEY),
@@ -69,23 +112,31 @@ class Py3status:
 
             response = requests.get(endpoint, params=params).json()
 
-            for item in response['busTimes']:
-                service = item['mnemoService']
-                if service in BUSES and BUSES[service]['stop_id'] == int(item['stopId']):
-                    BUSES[service]['next'] = int(item['timeDatas'][0]['minutes'])
+            if len(response) > 0:
+                for item in response['busTimes']:
+                    service = item['mnemoService']
+                    if service in self.BUSES and self.BUSES[service]['stop_id'] == int(item['stopId']):
+                        self.BUSES[service]['next'] = int(item['timeDatas'][0]['minutes'])
 
-            return BUSES
+            return self.BUSES
 
         get_times()
 
         output = [
-            TPL.format(bus_n=k, time=v['next']) for k, v in BUSES.items() if v['next'] < 120 and v['next'] is not None
+            TPL.format(bus_n=k, time=v['next']) for k, v in self.BUSES.items() if v['next'] < 120 and v['next'] is not None
         ]
 
+        new_output = " ".join(map(str, output))
+        new_output = self.BUSES["Place"]["logo"] + " " + new_output
+
         if self.enabled:
-            return {'full_text': " ".join(map(str, output)), 'cached_until': self.py3.time_in(seconds=30)}
+            return {'full_text': new_output, 'cached_until': self.py3.time_in(seconds=30)}
         else:
             return {'full_text': "", 'cached_until': self.py3.time_in(seconds=30)}
 
     def on_click(self, event):
-        self.enabled = not self.enabled
+        button = event['button']
+        if button == 1:
+            self.BUSES = next(self.bus_type)
+        if button == 3:
+            self.enabled = not self.enabled
