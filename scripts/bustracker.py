@@ -138,5 +138,7 @@ class Py3status:
         button = event['button']
         if button == 1:
             self.BUSES = next(self.bus_type)
+            if self.enabled == False:
+                self.enabled = True
         if button == 3:
             self.enabled = not self.enabled

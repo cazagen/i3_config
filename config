@@ -200,7 +200,7 @@ bindsym $mod+l exec /home/cazagen/.config/i3/scripts/lock.sh
 # Window borders
 
 for_window [class="^.*"] border pixel 1
-
+for_window [class="Opera"] border pixel 0
 # PROPER SCROLLING
 
 exec_always --no-startup-id /home/cazagen/.config/i3/scripts/scrolling.py
@@ -222,8 +222,11 @@ bindsym $mod+Tab workspace next
 bindsym Shift+XF86LaunchA exec --no-startup-id i3-msg 'exec mosquitto_pub -h mqtt -t 'sound/g1/play' -m sad.mp3'
 
 # Print screen
-bindsym Print --release exec scrot -e 'mv $f /home/cazagen/Pictures' 
-bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures' 
+#bindsym Print --release exec scrot -e 'mv $f /home/cazagen/Pictures' 
+#bindsym Shift+Print --release exec scrot -se 'mv $f /home/cazagen/Pictures' 
+bindsym Print --release exec /home/cazagen/.config/i3/scripts/screenshot.sh
+bindsym Shift+Print --release exec /home/cazagen/.config/i3/scripts/screenshot_selection.sh
+
 
 # Hacklab mqtt speak script
 bindsym Shift+XF86Explorer exec gtk-launch zen
@@ -243,7 +246,7 @@ bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
 
 # Network manager
-exec --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 
 # Start compton
 exec_always --no-startup-id compton --config .config/compton.conf -b
