@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILENAME=$(date +"%Y-%m-%d_%H:%M")
+FILENAME=$(date +"%Y-%m-%d_%H:%M:%S")
 
 URL="https://i.cazagen.me/"$FILENAME.png
 FILENAME=$HOME/Pictures/$FILENAME.png
