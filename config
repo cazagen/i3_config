@@ -201,6 +201,8 @@ bindsym $mod+l exec /home/cazagen/.config/i3/scripts/lock.sh
 
 for_window [class="^.*"] border pixel 1
 for_window [class="Opera"] border pixel 0
+for_window [class="Google-chrome"] border pixel 0
+for_window [class="discord"] border pixel 0
 # PROPER SCROLLING
 
 exec_always --no-startup-id /home/cazagen/.config/i3/scripts/scrolling.py
@@ -210,7 +212,15 @@ exec_always --no-startup-id /home/cazagen/.config/i3/scripts/scrolling.py
 exec_always --no-startup-id /home/cazagen/.config/i3/scripts/tapping.py
 
 # Open opera
-bindsym XF86Search exec opera
+#bindsym XF86Search exec opera
+
+
+# Make chrome open on workspace 2
+for_window [class="Google-chrome"] move to workspace 2
+
+# Open chrome
+bindsym XF86Search exec google-chrome-stable
+
 
 # LEDs rainbow bind
 bindsym Shift+XF86Search exec --no-startup-id i3-msg 'exec mosquitto_pub -h mqtt -t 'display/g1/leds' -m rainbow'
@@ -240,7 +250,6 @@ exec --no-startup-id irccloud-desktop
 
 # Shift to last used workspace
 bindsym XF86Tools workspace back_and_forth
-
 # PgUp and PgDn to go left and right a workspace
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
@@ -254,3 +263,8 @@ exec_always --no-startup-id compton --config .config/compton.conf -b
 # Hopefully fix spotify being silly
 for_window [class="^Spotify$"] floating enable
 
+# Fullscreen discord
+for_window [class="discord"] fullscreen enable
+
+# Detect if docked (script broken)
+#exec_always --no-startup-id /home/cazagen/.config/i3/scripts/display_checker.py

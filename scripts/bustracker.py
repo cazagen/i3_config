@@ -33,7 +33,7 @@ class MyIter:
 class Py3status:
 
     def __init__(self):
-        self.enabled = True
+        self.enabled = False
         BUSES_LAB = {
             "3": {
                 "stop_id": 36234798,
