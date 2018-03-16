@@ -237,9 +237,11 @@ bindsym Shift+XF86LaunchA exec --no-startup-id i3-msg 'exec mosquitto_pub -h mqt
 bindsym Print --release exec /home/cazagen/.config/i3/scripts/screenshot.sh
 bindsym Shift+Print --release exec /home/cazagen/.config/i3/scripts/screenshot_selection.sh
 
-
 # Hacklab mqtt speak script
 bindsym Shift+XF86Explorer exec gtk-launch zen
+
+# Hacklab mqtt kill sound
+bindsym $mod+XF86Explorer exec --no-startup-id i3-msg 'exec mosquitto_pub -h mqtt -t 'sound/g1/kill' -n'
 
 # Open nautilus
 bindsym $mod+e exec nautilus
@@ -268,3 +270,6 @@ for_window [class="discord"] fullscreen enable
 
 # Detect if docked (script broken)
 #exec_always --no-startup-id /home/cazagen/.config/i3/scripts/display_checker.py
+
+# If docked disable wifi (doesnt actually work, needs sudo)
+#exec_always --no-startup-id /home/cazagen/.config/i3/scripts/wifi_checker.py
